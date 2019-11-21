@@ -1,9 +1,9 @@
 #include "Factory.h"
 
-class Business					//ÒµÎñ²ã
+class Business					//ä¸šåŠ¡å±‚
 {
 public:
-	//void CreatCourse(Course c) //²âÊÔÌí¼Ó¿Î³Ì
+	//void CreatCourse(Course c) //æµ‹è¯•æ·»åŠ è¯¾ç¨‹
 	//{
 	//	CourseDAOImpl* ptr = static_cast<CourseDAOImpl*>(Factory::GetInstance()->getDAO("course"));
 	//	ptr->InsertCourse(c);
@@ -40,12 +40,12 @@ public:
 int main()
 {
 	Business bus;
-	//²âÊÔ£¬Ìí¼ÓÒ»Ìõ¼ÇÂ¼
-	/*Course c1("K001", "¼ÆËã»úÍ¼ĞÎÑ§", 2.5, 40, "ºú¾§¾§");
+	//æµ‹è¯•ï¼Œæ·»åŠ ä¸€æ¡è®°å½•
+	/*Course c1("K001", "è®¡ç®—æœºå›¾å½¢å­¦", 2.5, 40, "èƒ¡æ™¶æ™¶");
 	bus.CreatCourse(c1);*/
 
 
 
-	AfxDaoTerm();			//³ÌĞò±ØĞëÔÚ½áÊøÇ°µ÷ÓÃÕâ¸öº¯Êı
+	AfxDaoTerm();			//ç¨‹åºå¿…é¡»åœ¨ç»“æŸå‰è°ƒç”¨è¿™ä¸ªå‡½æ•°
 	return 0;
 }
