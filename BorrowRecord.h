@@ -32,11 +32,11 @@ public:
 	{
 		this->barcode = barcode;
 	}
-	void setBtime(COleDateTime btime)
+	void setBtime(string btime)
 	{
 		this->btime = btime;
 	}
-	void setRtime(COleDateTime rtime)
+	void setRtime(string rtime)
 	{
 		this->rtime = rtime;
 	}
@@ -52,8 +52,8 @@ class BorrowRecordDAO
 
 class BorrowRecordDAOImpl : public BorrowRecordDAO, public DAObase
 {
-	void InsertBorrowRecord(BorrowRecord borrowrecord) = 0;
-	void DeleteBorrowRecord(string cnum, string barcode) = 0;
-	void UpdateBorrowRecord(string cnum, string barcode, string field, string value) = 0;
-	vector<BorrowRecord> SearchBorrowRecord(string cnum, string barcode) = 0;
+	void InsertBorrowRecord(BorrowRecord borrowrecord);
+	void DeleteBorrowRecord(string cnum, string barcode);
+	void UpdateBorrowRecord(string cnum, string barcode, string field, string value);
+	vector<BorrowRecord> SearchBorrowRecord(string cnum, string barcode);
 };

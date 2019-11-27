@@ -1,9 +1,9 @@
-#include "BorrowRecord.h"	/*****Çë·ÂÕÕCourse²¢²ÎÕÕÊý¾Ý¿â£¬ÊµÏÖ½èÔÄ±íµÄÔöÉ¾¸Ä²éDAO²Ù×÷*****/
+#include "BorrowRecord.h"	/*****ï¿½ï¿½ï¿½ï¿½ï¿½Courseï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿â£¬Êµï¿½Ö½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½Ä²ï¿½DAOï¿½ï¿½ï¿½ï¿½*****/
 void BorrowRecordDAOImpl::InsertBorrowRecord(BorrowRecord borrowrecord)
 {
 	CDaoDatabase* conn = Getconnection();
 	CString sql;
-	sql.Format("insert into BOOKB(CNUM,BARCODE,BTIME,RTIME) values('%s','%s',to_date ( \''%d'-'%d'-'%d'\' , \'YYYY-MM-DD\'), to_date ( \''%d'-'%d'-'%d'\' , \'YYYY-MM-DD\' ) )",
+	sql.Format("insert into BOOKB(CNUM,BARCODE,BTIME,RTIME) values('%s','%s','%s','%s')",
 		borrowrecord.getCnum().c_str(), borrowrecord.getBarcode().c_str(),
 		borrowrecord.getBtime().GetYear(),borrowrecord.getBtime().GetMonth(),borrowrecord.getBtime().GetDay(),
 		borrowrecord.getRtime().GetYear(), borrowrecord.getRtime().GetMonth(), borrowrecord.getRtime().GetDay());
@@ -42,25 +42,17 @@ vector<BorrowRecord> BorrowRecordDAOImpl::SearchBorrowRecord(string cnum, string
 	sql.Format("select * from BOOKB where CNUM = '%s' and BARCODE = '%s'", cnum.c_str(), barcode.c_str());
 	vector<BorrowRecord> v = vector<BorrowRecord>();
 	rs.Open(AFX_DAO_USE_DEFAULT_TYPE, sql, dbSeeChanges);
-	if (rs.IsEOF())
-		;
-	else
-	{
-		while (true)
-		{
-			COleVariant value;
-			rs.GetFieldValue("CNUM", value);
-			borrowrecord.setCnum((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("BARCODE", value);
-			borrowrecord.setBarcode((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("BTIME", value);
-			borrowrecord.setBtime((COleDateTime)value);
-			rs.GetFieldValue("RTIME", value);
-			borrowrecord.setRtime((COleDateTime)value);
-			v.push_back(comment);
-			rs.MoveNext();
-		}
-	}
+	COleVariant value;
+	rs.GetFieldValue("CNUM", value);
+	borrowrecord.setCnum((LPCTSTR)value.pbstrVal);
+	rs.GetFieldValue("BARCODE", value);
+	borrowrecord.setBarcode((LPCTSTR)value.pbstrVal);
+	rs.GetFieldValue("BTIME", value);
+	borrowrecord.setBtime((LPCTSTR)value);
+	rs.GetFieldValue("RTIME", value);
+	borrowrecord.setRtime((LPCTSTR)value);
+	v.push_back(comment);
+	rs.MoveNext();
 	conn->Close();
 	rs.Close();
 	delete conn;
