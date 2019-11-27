@@ -43,8 +43,8 @@ class CommentDAO
 
 class CommentDAOImpl : public CommentDAO, public DAObase
 {
-	void InsertComment(Comment comment) = 0;
-	void DeleteComment(string ISBNprice, string cnum) = 0;
-	void UpdateComment(string ISBNprice, string cnum, string field, string value) = 0;
-	vector<Comment> SearchComment(string ISBNprice, string cnum) = 0;
+	void InsertComment(Comment comment);
+	void DeleteComment(string ISBNprice, string cnum);
+	void UpdateComment(string ISBNprice, string cnum, string field, string value);
+	vector<Comment> SearchComment(string ISBNprice, string cnum);
 };

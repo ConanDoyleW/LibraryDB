@@ -1,4 +1,4 @@
-#include "Comment.h"	/*****Çë·ÂÕÕCourse²¢²ÎÕÕÊý¾Ý¿â£¬ÊµÏÖÆÀÂÛ±íµÄÔöÉ¾¸Ä²éDAO²Ù×÷*****/
+#include "Comment.h"	/*****ï¿½ï¿½ï¿½ï¿½ï¿½Courseï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿â£¬Êµï¿½ï¿½ï¿½ï¿½ï¿½Û±ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½Ä²ï¿½DAOï¿½ï¿½ï¿½ï¿½*****/
 
 void CommentDAOImpl::InsertComment(Comment comment)
 {
@@ -42,23 +42,16 @@ vector<Comment> CommentDAOImpl::SearchComment(string ISBNprice, string cnum)
 	sql.Format("select * from BOOKHAVECOMMENTS where ISBNPRICE = '%s' and CNUM = '%s'", ISBNprice.c_str(), cnum.c_str());
 	vector<Comment> v = vector<Comment>();
 	rs.Open(AFX_DAO_USE_DEFAULT_TYPE, sql, dbSeeChanges);
-	if (rs.IsEOF())
-		;
-	else
-	{
-		while (true)
-		{
-			COleVariant value;
-			rs.GetFieldValue("ISBNPRICE", value);
-			comment.setISBNprice((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("COM", value);
-			comment.setCom((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("CNUM", value);
-			comment.setCnum((LPCTSTR)value.pbstrVal);
-			v.push_back(comment);
-			rs.MoveNext();
-		}
-	}
+
+	COleVariant value;
+	rs.GetFieldValue("ISBNPRICE", value);
+	comment.setISBNprice((LPCTSTR)value.pbstrVal);
+	rs.GetFieldValue("COM", value);
+	comment.setCom((LPCTSTR)value.pbstrVal);
+	rs.GetFieldValue("CNUM", value);
+	comment.setCnum((LPCTSTR)value.pbstrVal);
+	v.push_back(comment);
+	rs.MoveNext();
 	conn->Close();
 	rs.Close();
 	delete conn;
