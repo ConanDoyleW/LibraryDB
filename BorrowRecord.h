@@ -5,8 +5,8 @@ class BorrowRecord
 private:
 	string cnum;
 	string barcode;
-	COleDateTime btime;
-	COleDateTime rtime;
+	string btime;
+	string rtime;
 public:
 	string getCnum()
 	{
@@ -16,11 +16,11 @@ public:
 	{
 		return barcode;
 	}
-	COleDateTime getBtime()
+	string getBtime()
 	{
 		return btime;
 	}
-	COleDateTime getRtime()
+	string getRtime()
 	{
 		return rtime;
 	}
@@ -40,20 +40,24 @@ public:
 	{
 		this->rtime = rtime;
 	}
+	BorrowRecord() {};
+	BorrowRecord(string cnum, string barcode, string btime, string rtime);
 };
 
 class BorrowRecordDAO
 {
+public:
 	virtual void InsertBorrowRecord(BorrowRecord borrowrecord) = 0;
 	virtual void DeleteBorrowRecord(string cnum, string barcode) = 0;
 	virtual void UpdateBorrowRecord(string cnum, string barcode, string field, string value) = 0;
-	virtual vector<BorrowRecord> SearchBorrowRecord(string cnum, string barcode) = 0;
+	virtual vector<BorrowRecord> SearchBorrowRecord(string par, string mode) = 0;
 };
 
 class BorrowRecordDAOImpl : public BorrowRecordDAO, public DAObase
 {
+public:
 	void InsertBorrowRecord(BorrowRecord borrowrecord);
 	void DeleteBorrowRecord(string cnum, string barcode);
 	void UpdateBorrowRecord(string cnum, string barcode, string field, string value);
-	vector<BorrowRecord> SearchBorrowRecord(string cnum, string barcode);
+	vector<BorrowRecord> SearchBorrowRecord(string par, string mode);
 };
