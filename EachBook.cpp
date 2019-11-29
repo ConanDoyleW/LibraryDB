@@ -1,4 +1,4 @@
-#include "EachBook.h"	 /*****Çë·ÂÕÕCourse£¬ÊµÏÖÊé¼®(±¾)±íµÄÔöÉ¾¸Ä²éDAO²Ù×÷*****/
+#include "EachBook.h"	 /*****è¯·ä»¿ç…§Courseï¼Œå®ç°ä¹¦ç±(æœ¬)è¡¨çš„å¢åˆ æ”¹æŸ¥DAOæ“ä½œ*****/
 
 void EachBookDAOImpl::InsertBook(EachBook book)
 {
@@ -43,31 +43,40 @@ vector<EachBook> EachBookDAOImpl::SearchBook(string id)
 	sql.Format("select * from pbook where barcode= '%s'", id.c_str());
 	vector<EachBook> v = vector<EachBook>();
 	rs.Open(AFX_DAO_USE_DEFAULT_TYPE, sql, dbSeeChanges);
-	if (rs.IsEOF())
-		;
-	else
+	while (!rs.IsEOF())
 	{
-		while (true)
-		{
-			COleVariant value;
-			rs.GetFieldValue("callnum", value);
-			book.setIndexNum((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("isbnprice", value);
-			book.setIsbnAndPrice((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("barcode", value);
-			book.setBarCode((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("volumeissue", value);
-			book.setVolume((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("collect", value);
-			book.setLocation((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("bookcond", value);
-			book.setStatus((LPCTSTR)value.pbstrVal);
-			v.push_back(book);
-			rs.MoveNext();
-		}
+		COleVariant value;
+		rs.GetFieldValue("callnum", value);
+		book.setIndexNum((LPCTSTR)value.pbstrVal);
+		rs.GetFieldValue("isbnprice", value);
+		book.setIsbnAndPrice((LPCTSTR)value.pbstrVal);
+		rs.GetFieldValue("barcode", value);
+		book.setBarCode((LPCTSTR)value.pbstrVal);
+		rs.GetFieldValue("volumeissue", value);
+		book.setVolume((LPCTSTR)value.pbstrVal);
+		rs.GetFieldValue("collect", value);
+		book.setLocation((LPCTSTR)value.pbstrVal);
+		rs.GetFieldValue("bookcond", value);
+		book.setStatus((LPCTSTR)value.pbstrVal);
+		v.push_back(book);
+		rs.MoveNext();
 	}
 	conn->Close();
 	rs.Close();
 	delete conn;
 	return v;
+}
+
+EachBook::EachBook()
+{
+}
+
+EachBook::EachBook(string indexNum, string isbnAndPrice, string barCode, string volume, string location, string status)
+{
+	this->indexNum = indexNum;
+	this->isbnAndPrice = isbnAndPrice;
+	this->barCode = barCode;
+	this->volume = volume;
+	this->location = location;
+	this->status = status;
 }
