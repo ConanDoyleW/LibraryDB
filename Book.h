@@ -13,6 +13,9 @@ private:
 	string subPersonInCharge;
 	string carrierShapeItem;
 public:
+	Book();
+	Book(string name, string topic, string isbnAndPrice, string indexNumber, string publishInfo,
+		string cnLibClassm, string personInCharge, string subPersonInCharge, string carrierShapeItem);
 	void setName(string name)
 	{
 		this->name = name;
@@ -98,7 +101,7 @@ class BookDAO
 class BookDAOImpl : public BookDAO, public DAObase
 {
 	void InsertBook(Book book);
-	void DeleteBook(string id) = 0;
-	void UpdateBook(string id, string field, string value) = 0;
-	vector<Book> SearchBook(string id) = 0;
+	void DeleteBook(string id);
+	void UpdateBook(string id, string field, string value);
+	vector<Book> SearchBook(string id);
 };
