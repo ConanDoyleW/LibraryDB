@@ -10,6 +10,8 @@ private:
 	string location;
 	string status;
 public:
+	EachBook();
+	EachBook(string indexNum, string isbnAndPrice, string barCode, string volume, string location, string status);
 	string getIndexNum()
 	{
 		return indexNum;
@@ -72,6 +74,6 @@ class EachBookDAOImpl : public EachBookDAO, public DAObase
 {
 	void InsertBook(EachBook book);
 	void DeleteBook(string id) = 0;
-	void UpdateBook(string id, string field, string value) = 0;
-	vector<EachBook> SearchBook(string id) = 0;
+	void UpdateBook(string id, string field, string value);
+	vector<EachBook> SearchBook(string id);
 };
