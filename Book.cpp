@@ -1,4 +1,4 @@
-#include "Book.h"	 /*****Çë·ÂÕÕCourse²¢²ÎÕÕÊı¾İ¿â£¬ÊµÏÖÊé¼®(²¿)±íµÄÔöÉ¾¸Ä²éDAO²Ù×÷*****/
+#include "Book.h"	 /*****è¯·ä»¿ç…§Courseå¹¶å‚ç…§æ•°æ®åº“ï¼Œå®ç°ä¹¦ç±(éƒ¨)è¡¨çš„å¢åˆ æ”¹æŸ¥DAOæ“ä½œ*****/
 
 void BookDAOImpl::InsertBook(Book book)
 {
@@ -44,35 +44,47 @@ vector<Book> BookDAOImpl::SearchBook(string id)
 	sql.Format("select * from pkbook where isbnprice= '%s'", id.c_str());
 	rs.Open(AFX_DAO_USE_DEFAULT_TYPE, sql, dbSeeChanges);
 	vector<Book> v = vector<Book>();
-	if (rs.IsEOF())
-		;
-	else
+	while (!rs.IsEOF())
 	{
-		while (!rs.IsEOF())
-		{
-			COleVariant value;
-			rs.GetFieldValue("bn", value);
-			book.setName((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("stheme", value);
-			book.setTopic((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("isbnprice", value);
-			book.setIsbnAndPrice((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("pubitem", value);
-			book.setPublishInfo((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("cpknum", value);
-			book.setCnLibClass((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("privp", value);
-			book.setPersonInCharge((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("privnp", value);
-			book.setSubPersonInCharge((LPCTSTR)value.pbstrVal);
-			rs.GetFieldValue("formitem", value);
-			book.setCarrierShapeItem((LPCTSTR)value.pbstrVal);
-			v.push_back(book);
-			rs.MoveNext();
-		}
+		COleVariant value;
+		rs.GetFieldValue("bn", value);
+		book.setName((LPCTSTR)value.pbstrVal);
+		rs.GetFieldValue("stheme", value);
+		book.setTopic((LPCTSTR)value.pbstrVal);
+		rs.GetFieldValue("isbnprice", value);
+		book.setIsbnAndPrice((LPCTSTR)value.pbstrVal);
+		rs.GetFieldValue("pubitem", value);
+		book.setPublishInfo((LPCTSTR)value.pbstrVal);
+		rs.GetFieldValue("cpknum", value);
+		book.setCnLibClass((LPCTSTR)value.pbstrVal);
+		rs.GetFieldValue("privp", value);
+		book.setPersonInCharge((LPCTSTR)value.pbstrVal);
+		rs.GetFieldValue("privnp", value);
+		book.setSubPersonInCharge((LPCTSTR)value.pbstrVal);
+		rs.GetFieldValue("formitem", value);
+		book.setCarrierShapeItem((LPCTSTR)value.pbstrVal);
+		v.push_back(book);
+		rs.MoveNext();
 	}
 	conn->Close();
 	rs.Close();
 	delete conn;
 	return v;
+}
+
+Book::Book()
+{
+}
+
+Book::Book(string name, string topic, string isbnAndPrice, string indexNumber, string publishInfo, string cnLibClassm, string personInCharge, string subPersonInCharge, string carrierShapeItem)
+{
+	this->name = name;
+	this->topic = topic;
+	this->isbnAndPrice = isbnAndPrice;
+	this->indexNumber = indexNumber;
+	this->publishInfo = publishInfo;
+	this->cnLibClass = cnLibClass;
+	this->personInCharge = personInCharge;
+	this->subPersonInCharge = subPersonInCharge;
+	this->carrierShapeItem = carrierShapeItem;
 }
