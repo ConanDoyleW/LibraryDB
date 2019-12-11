@@ -1,24 +1,24 @@
 #include "DAO.h"
-#include <vector>
+
 class EachBook
 {
 private:
 	string indexNum;
-	string isbnAndPrice;
+	string isbn;
 	string barCode;
 	string volume;
 	string location;
 	string status;
 public:
 	EachBook();
-	EachBook(string indexNum, string isbnAndPrice, string barCode, string volume, string location, string status);
+	EachBook(string indexNum, string isbn, string barCode, string volume, string location, string status);
 	string getIndexNum()
 	{
 		return indexNum;
 	}
-	string getIsbnAndPrice()
+	string getIsbn()
 	{
-		return isbnAndPrice;
+		return isbn;
 	}
 	string getBarCode()
 	{
@@ -40,9 +40,9 @@ public:
 	{
 		this->indexNum = indexNum;
 	}
-	void setIsbnAndPrice(string isbnAndPrice)
+	void setIsbnAndPrice(string isbn)
 	{
-		this->isbnAndPrice = isbnAndPrice;
+		this->isbn = isbn;
 	}
 	void setBarCode(string barCode)
 	{
@@ -64,16 +64,18 @@ public:
 
 class EachBookDAO
 {
+public:
 	virtual void InsertBook(EachBook book) = 0;
 	virtual void DeleteBook(string id) = 0;
 	virtual void UpdateBook(string id, string field, string value) = 0;
-	virtual vector<EachBook> SearchBook(string id) = 0;
+	virtual vector<EachBook> SearchBook(string par, string mode) = 0;
 };
 
 class EachBookDAOImpl : public EachBookDAO, public DAObase
 {
+public:
 	void InsertBook(EachBook book);
-	void DeleteBook(string id) = 0;
+	void DeleteBook(string id);
 	void UpdateBook(string id, string field, string value);
-	vector<EachBook> SearchBook(string id);
+	vector<EachBook> SearchBook(string par, string mode);
 };
