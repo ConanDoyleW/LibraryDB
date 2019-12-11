@@ -1,48 +1,42 @@
-#include "Factory.h"
+#include "Business.h"
 
-class Business					//业务层
+static Reader *curReader = NULL;		//当前登录借阅用户
+static Manager *curManager = NULL;		//当前登录管理员
+static Business Library;
+
+void Start()			//启动系统
 {
-public:
-	//void CreatCourse(Course c) //测试添加课程
-	//{
-	//	CourseDAOImpl* ptr = static_cast<CourseDAOImpl*>(Factory::GetInstance()->getDAO("course"));
-	//	ptr->InsertCourse(c);
-	//	delete ptr;
-	//}
 
-	void InsertReader(Reader reader)
+}
+
+void ReaderLogin(Reader reader)			//借阅用户登录
+{
+	if (reader.getpwd() == (Library.SearchReader(reader.getusrid())).getpwd())
 	{
-		ReaderDAOImpl* ptr = static_cast<ReaderDAOImpl*>(Factory::GetInstance()->getDAO("Reader"));
-		ptr->InsertReader(reader);
-		delete ptr;
+		*curReader = reader;
+		cout << "登录成功！" << endl;
 	}
-	void DeleteReader(string id)
+	else
 	{
-		ReaderDAOImpl* ptr = static_cast<ReaderDAOImpl*>(Factory::GetInstance()->getDAO("Reader"));
-		ptr->DeleteReader(id);
-		delete ptr;
+		cout << "登录失败，用户名或密码错误！" << endl;
 	}
-	void UpdateReader(string id, string field, string value)
+}
+
+void ManagerLogin(Manager manager)			//管理员登录
+{
+	if (manager.getpwd() == (Library.SearchManager(manager.getusrid())).getpwd())
 	{
-		ReaderDAOImpl* ptr = static_cast<ReaderDAOImpl*>(Factory::GetInstance()->getDAO("Reader"));
-		ptr->UpdateReader(id, field, value);
-		delete ptr;
+		*curManager = manager;
+		cout << "登录成功！" << endl;
 	}
-	void SearchReader(string id)
+	else
 	{
-		ReaderDAOImpl* ptr = static_cast<ReaderDAOImpl*>(Factory::GetInstance()->getDAO("Reader"));
-		Reader temp = ptr->SearchReader(id);
-		cout << temp.getusrid() << endl << temp.getpwd() << endl;
-		delete ptr;
+		cout << "登录失败，用户名或密码错误！" << endl;
 	}
-};
+}
 
 int main()
 {
-	Business bus;
-	//测试，添加一条记录
-	/*Course c1("K001", "计算机图形学", 2.5, 40, "胡晶晶");
-	bus.CreatCourse(c1);*/
 
 
 
