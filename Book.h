@@ -1,12 +1,11 @@
 #include "DAO.h"
-#include <vector>
+
 class Book
 {
 private:
 	string name;
 	string topic;
-	string isbnAndPrice;
-	string indexNumber;
+	string isbn;
 	string publishInfo;
 	string cnLibClass;
 	string personInCharge;
@@ -14,7 +13,7 @@ private:
 	string carrierShapeItem;
 public:
 	Book();
-	Book(string name, string topic, string isbnAndPrice, string indexNumber, string publishInfo,
+	Book(string name, string topic, string isbn, string publishInfo,
 		string cnLibClassm, string personInCharge, string subPersonInCharge, string carrierShapeItem);
 	void setName(string name)
 	{
@@ -24,13 +23,9 @@ public:
 	{
 		this->topic = topic;
 	}
-	void setIsbnAndPrice(string isbnAndPrice)
+	void setIsbn(string isbn)
 	{
-		this->isbnAndPrice = isbnAndPrice;
-	}
-	void setIndexNumber(string indexNumber)
-	{
-		this->indexNumber = indexNumber;
+		this->isbn = isbn;
 	}
 	void setPublishInfo(string publishInfo)
 	{
@@ -60,13 +55,9 @@ public:
 	{
 		return topic;
 	}
-	string getIsbnAndPrice()
+	string getIsbn()
 	{
-		return isbnAndPrice;
-	}
-	string getIndexNumber()
-	{
-		return indexNumber;
+		return isbn;
 	}
 	string getPublishInfo()
 	{
@@ -92,16 +83,18 @@ public:
 
 class BookDAO
 {
+public:
 	virtual void InsertBook(Book book) = 0;
 	virtual void DeleteBook(string id) = 0;
 	virtual void UpdateBook(string id, string field, string value) = 0;
-	virtual vector<Book> SearchBook(string id) = 0;
+	virtual vector<Book> SearchBook(string par, string mode) = 0;
 };
 
 class BookDAOImpl : public BookDAO, public DAObase
 {
+public:
 	void InsertBook(Book book);
 	void DeleteBook(string id);
 	void UpdateBook(string id, string field, string value);
-	vector<Book> SearchBook(string id);
+	vector<Book> SearchBook(string par, string mode);
 };
