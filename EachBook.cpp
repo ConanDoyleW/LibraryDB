@@ -5,7 +5,7 @@ void EachBookDAOImpl::InsertBook(EachBook book)
 	CDaoDatabase* conn = Getconnection();
 	CString sql;
 	sql.Format("insert into pbook values('%s','%s','%s','%s','%s','%s')",
-		book.getIndexNum().c_str, book.getIsbn().c_str(),
+		book.getIndexNum().c_str(), book.getIsbn().c_str(),
 		book.getBarCode().c_str(), book.getVolume().c_str(),
 		book.getLocation().c_str(), book.getStatus().c_str());
 	conn->Execute(sql, dbSeeChanges);
