@@ -3,13 +3,15 @@
 class Comment
 {
 private:
-	string ISBNprice;
+	string isbn;
 	string com;
 	string cnum;
 public:
-	string getISBNprice()
+	Comment() {};
+	Comment(string isbn, string com, string cnum);
+	string getIsbn()
 	{
-		return ISBNprice;
+		return isbn;
 	}
 	string getCom()
 	{
@@ -19,9 +21,9 @@ public:
 	{
 		return cnum;
 	}
-	void setISBNprice(string ISBNprice)
+	void setIsbn(string isbn)
 	{
-		this->ISBNprice = ISBNprice;
+		this->isbn = isbn;
 	}
 	void setCom(string com)
 	{
@@ -35,16 +37,18 @@ public:
 
 class CommentDAO
 {
+public:
 	virtual void InsertComment(Comment comment) = 0;
-	virtual void DeleteComment(string ISBNprice, string cnum) = 0;
-	virtual void UpdateComment(string ISBNprice, string cnum, string field, string value) = 0;
-	virtual vector<Comment> SearchComment(string ISBNprice, string cnum) = 0;
+	virtual void DeleteComment(string isbn, string cnum) = 0;
+	virtual void UpdateComment(string isbn, string cnum, string field, string value) = 0;
+	virtual vector<Comment> SearchComment(string par, string mode) = 0;
 };
 
 class CommentDAOImpl : public CommentDAO, public DAObase
 {
+public:
 	void InsertComment(Comment comment);
-	void DeleteComment(string ISBNprice, string cnum);
-	void UpdateComment(string ISBNprice, string cnum, string field, string value);
-	vector<Comment> SearchComment(string ISBNprice, string cnum);
+	void DeleteComment(string isbn, string cnum);
+	void UpdateComment(string isbn, string cnum, string field, string value);
+	vector<Comment> SearchComment(string par, string mode);
 };
