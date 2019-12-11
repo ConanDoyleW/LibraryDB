@@ -1,11 +1,15 @@
-#include "Course.h"
 #include "Reader.h"
+#include "BorrowRecord.h"
+#include "Book.h"
+#include "Comment.h"
+#include "Manager.h"
+#include "EachBook.h"
 
-class Factory			//¹¤³§Àà
+class Factory			//å·¥å‚ç±»
 {
 private:
 	Factory() {}
 public:
-	static Factory* GetInstance();			//ÊµÏÖµ¥ÀıÄ£Ê½
-	DAObase *getDAO(string type);			//Éú²úDAO¶ÔÏó
+	static Factory* GetInstance();			//å®ç°å•ä¾‹æ¨¡å¼
+	DAObase *getDAO(string type);			//ç”Ÿäº§DAOå¯¹è±¡
 };
