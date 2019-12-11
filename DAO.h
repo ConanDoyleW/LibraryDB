@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
 #include <afxdao.h>
+#include <vector>
 #pragma once
 
 using namespace std;
 
-class DAO				//DAO¶ÔÏó
+class DAO				//DAOå¯¹è±¡
 {
 public:
 	virtual CDaoDatabase* Getconnection() = 0;
