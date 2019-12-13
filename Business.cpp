@@ -96,10 +96,10 @@ void Business::UpdateBook(string id, string field, string value)
 	ptr->UpdateBook(id, field, value);
 	delete ptr;
 }
-vector<Book> Business::SearchBook(string par, string mode)
+vector<Book*> Business::SearchBook(string par, string mode)
 {
 	BookDAOImpl* ptr = static_cast<BookDAOImpl*>(Factory::GetInstance()->getDAO("Book"));
-	vector<Book> temp = ptr->SearchBook(par, mode);
+	vector<Book*> temp = ptr->SearchBook(par, mode);
 	delete ptr;
 	return temp;
 }
@@ -148,10 +148,10 @@ void Business::UpdateEachBook(string id, string field, string value)
 	ptr->UpdateBook(id, field, value);
 	delete ptr;
 }
-vector<EachBook> Business::SearchEachBook(string par, string mode)
+vector<EachBook*> Business::SearchEachBook(string par, string mode)
 {
 	EachBookDAOImpl* ptr = static_cast<EachBookDAOImpl*>(Factory::GetInstance()->getDAO("EachBook"));
-	vector<EachBook> temp = ptr->SearchBook(par, mode);
+	vector<EachBook*> temp = ptr->SearchBook(par, mode);
 	delete ptr;
 	return temp;
 }

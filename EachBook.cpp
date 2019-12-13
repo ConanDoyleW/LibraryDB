@@ -5,7 +5,7 @@ void EachBookDAOImpl::InsertBook(EachBook book)
 	CDaoDatabase* conn = Getconnection();
 	CString sql;
 	sql.Format("insert into pbook values('%s','%s','%s','%s','%s','%s')",
-		book.getIndexNum().c_str, book.getIsbn().c_str(),
+		book.getIndexNum().c_str(), book.getIsbn().c_str(),
 		book.getBarCode().c_str(), book.getVolume().c_str(),
 		book.getLocation().c_str(), book.getStatus().c_str());
 	conn->Execute(sql, dbSeeChanges);
@@ -34,30 +34,30 @@ void EachBookDAOImpl::UpdateBook(string id, string field, string value)
 	delete conn;
 }
 
-vector<EachBook> EachBookDAOImpl::SearchBook(string par, string mode)
+vector<EachBook*> EachBookDAOImpl::SearchBook(string par, string mode)
 {
 	CDaoDatabase* conn = Getconnection();
 	CDaoRecordset rs(conn);
 	CString sql;
 	sql.Format("select * from pbook where %s = '%s' ", mode.c_str(), par.c_str());
-	vector<EachBook> v = vector<EachBook>();
+	vector<EachBook*> v;
 	rs.Open(AFX_DAO_USE_DEFAULT_TYPE, sql, dbSeeChanges);
 	while (!rs.IsEOF())
 	{
-		EachBook book;
+		EachBook* book = new EachBook;
 		COleVariant value;
 		rs.GetFieldValue("callnum", value);
-		book.setIndexNum((LPCTSTR)value.pbstrVal);
+		book->setIndexNum((LPCTSTR)value.pbstrVal);
 		rs.GetFieldValue("isbn", value);
-		book.setIsbnAndPrice((LPCTSTR)value.pbstrVal);
+		book->setIsbnAndPrice((LPCTSTR)value.pbstrVal);
 		rs.GetFieldValue("barcode", value);
-		book.setBarCode((LPCTSTR)value.pbstrVal);
+		book->setBarCode((LPCTSTR)value.pbstrVal);
 		rs.GetFieldValue("volumeissue", value);
-		book.setVolume((LPCTSTR)value.pbstrVal);
+		book->setVolume((LPCTSTR)value.pbstrVal);
 		rs.GetFieldValue("collect", value);
-		book.setLocation((LPCTSTR)value.pbstrVal);
+		book->setLocation((LPCTSTR)value.pbstrVal);
 		rs.GetFieldValue("bookcond", value);
-		book.setStatus((LPCTSTR)value.pbstrVal);
+		book->setStatus((LPCTSTR)value.pbstrVal);
 		v.push_back(book);
 		rs.MoveNext();
 	}
