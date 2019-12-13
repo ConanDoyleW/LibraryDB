@@ -35,34 +35,34 @@ void BookDAOImpl::UpdateBook(string id, string field, string value)
 	delete conn;
 }
 
-vector<Book> BookDAOImpl::SearchBook(string par, string mode)
+vector<Book*> BookDAOImpl::SearchBook(string par, string mode)
 {
 	CDaoDatabase* conn = Getconnection();
 	CDaoRecordset rs(conn);
 	CString sql;
 	sql.Format("select * from pkbook where %s like'%%%s%%' ", mode.c_str(), par.c_str());
 	rs.Open(AFX_DAO_USE_DEFAULT_TYPE, sql, dbSeeChanges);
-	vector<Book> v;
+	vector<Book*> v;
 	while (!rs.IsEOF())
 	{
-		Book book;
+		Book* book = new Book;
 		COleVariant value;
 		rs.GetFieldValue("bn", value);
-		book.setName((LPCTSTR)value.pbstrVal);
+		book->setName((LPCTSTR)value.pbstrVal);
 		rs.GetFieldValue("stheme", value);
-		book.setTopic((LPCTSTR)value.pbstrVal);
+		book->setTopic((LPCTSTR)value.pbstrVal);
 		rs.GetFieldValue("isbn", value);
-		book.setIsbn((LPCTSTR)value.pbstrVal);
+		book->setIsbn((LPCTSTR)value.pbstrVal);
 		rs.GetFieldValue("pubitem", value);
-		book.setPublishInfo((LPCTSTR)value.pbstrVal);
+		book->setPublishInfo((LPCTSTR)value.pbstrVal);
 		rs.GetFieldValue("cpknum", value);
-		book.setCnLibClass((LPCTSTR)value.pbstrVal);
+		book->setCnLibClass((LPCTSTR)value.pbstrVal);
 		rs.GetFieldValue("privp", value);
-		book.setPersonInCharge((LPCTSTR)value.pbstrVal);
+		book->setPersonInCharge((LPCTSTR)value.pbstrVal);
 		rs.GetFieldValue("privnp", value);
-		book.setSubPersonInCharge((LPCTSTR)value.pbstrVal);
+		book->setSubPersonInCharge((LPCTSTR)value.pbstrVal);
 		rs.GetFieldValue("formitem", value);
-		book.setCarrierShapeItem((LPCTSTR)value.pbstrVal);
+		book->setCarrierShapeItem((LPCTSTR)value.pbstrVal);
 		v.push_back(book);
 		rs.MoveNext();
 	}
