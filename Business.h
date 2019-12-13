@@ -1,36 +1,37 @@
+#pragma once
 #include "Factory.h"
 
-class Business					//ÒµÎñ²ã
+static class Business					//ä¸šåŠ¡å±‚
 {
 public:
-	//½èÔÄÓÃ»§
-	void InsertReader(Reader reader);		//²åÈëÓÃ»§
-	void DeleteReader(string id);			//É¾³ıÓÃ»§
-	void UpdateReader(string id, string field, string value);		//¸üĞÂÓÃ»§
-	Reader SearchReader(string id);			//ËÑË÷ÓÃ»§
-	//¹ÜÀíÔ±
-	void InsertManager(Manager manager);
-	void DeleteManager(string id);
-	void UpdateManager(string id, string field, string value);
-	Manager SearchManager(string id);
-	//½èÔÄ¼ÇÂ¼
-	void InsertBorrowRecord(BorrowRecord br);
-	void DeleteBorrowRecord(string cnum, string barcode);
-	void UpdateBorrowRecord(string cnum, string barcode, string field, string value);
-	vector<BorrowRecord> SearchBorrowRecord(string par, string mode);	//ÒÔmodeÄ£Ê½ËÑË÷²ÎÊıpar
-	//Êé¼®(²¿)
-	void InsertBook(Book book);
-	void DeleteBook(string id);
-	void UpdateBook(string id, string field, string value);
-	vector<Book> SearchBook(string par, string mode);
-	//ÆÀÂÛ
-	void InsertComment(Comment comment);
-	void DeleteComment(string isbn, string cnum);
-	void UpdateComment(string isbn, string cnum, string field, string value);
-	vector<Comment> SearchComment(string par, string mode);
-	//Êé¼®(±¾)
-	void InsertEachBook(EachBook book);
-	void DeleteEachBook(string id);
-	void UpdateEachBook(string id, string field, string value);
-	vector<EachBook> SearchEachBook(string par, string mode);
+	//å€Ÿé˜…ç”¨æˆ·
+	static void InsertReader(Reader reader);		//æ’å…¥ç”¨æˆ·
+	static void DeleteReader(string id);			//åˆ é™¤ç”¨æˆ·
+	static void UpdateReader(string id, string field, string value);		//æ›´æ–°ç”¨æˆ·
+	static Reader SearchReader(string id);			//æœç´¢ç”¨æˆ·
+	//ç®¡ç†å‘˜
+	static void InsertManager(Manager manager);
+	static void DeleteManager(string id);
+	static void UpdateManager(string id, string field, string value);
+	static Manager SearchManager(string id);
+	//å€Ÿé˜…è®°å½•
+	static void InsertBorrowRecord(BorrowRecord br);
+	static void DeleteBorrowRecord(string cnum, string barcode);
+	static void UpdateBorrowRecord(string cnum, string barcode, string field, string value);
+	static vector<BorrowRecord> SearchBorrowRecord(string par, string mode);	//ä»¥modeæ¨¡å¼æœç´¢å‚æ•°par
+	//ä¹¦ç±(éƒ¨)
+	static void InsertBook(Book book);
+	static void DeleteBook(string id);
+	static void UpdateBook(string id, string field, string value);
+	static vector<Book*> SearchBook(string par, string mode);
+	//è¯„è®º
+	static void InsertComment(Comment comment);
+	static void DeleteComment(string isbn, string cnum);
+	static void UpdateComment(string isbn, string cnum, string field, string value);
+	static vector<Comment> SearchComment(string par, string mode);
+	//ä¹¦ç±(æœ¬)
+	static void InsertEachBook(EachBook book);
+	static void DeleteEachBook(string id);
+	static void UpdateEachBook(string id, string field, string value);
+	static vector<EachBook*> SearchEachBook(string par, string mode);
 };
