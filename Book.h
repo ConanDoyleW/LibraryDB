@@ -87,7 +87,7 @@ public:
 	virtual void InsertBook(Book book) = 0;
 	virtual void DeleteBook(string id) = 0;
 	virtual void UpdateBook(string id, string field, string value) = 0;
-	virtual vector<Book> SearchBook(string par, string mode) = 0;
+	virtual vector<Book*> SearchBook(string par, string mode) = 0;
 };
 
 class BookDAOImpl : public BookDAO, public DAObase
@@ -96,5 +96,5 @@ public:
 	void InsertBook(Book book);
 	void DeleteBook(string id);
 	void UpdateBook(string id, string field, string value);
-	vector<Book> SearchBook(string par, string mode);
+	vector<Book*> SearchBook(string par, string mode);
 };
